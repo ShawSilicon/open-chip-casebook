@@ -4,7 +4,7 @@
 
 Do not open a public issue for an unpatched vulnerability, and do not submit it as a case.
 
-Report it privately to security@shawsilicon.ai. Include what you found, how to reproduce
+Report it privately to john@shawsilicon.ai. Include what you found, how to reproduce
 it, and which vendor, project or specification it affects.
 
 ## What happens next

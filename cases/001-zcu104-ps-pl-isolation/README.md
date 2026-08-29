@@ -60,9 +60,13 @@ Vivado then returns `hw_ila_1` at depth 2048.
 Two register writes plus a status read-back. Bit 23 is PL in all three PMU_GLOBAL
 registers.
 
-Cost: no area, no timing, no power impact on the design. The cost is a bring-up ordering
-constraint, which is the kind of cost that does not show up in any report and is the
-reason this case is worth writing down.
+Cost: the source document does not quantify a cost in area, timing or power, and this
+case does not assert one. What it does record is a change to the bring-up sequence. The
+isolation removal is issued over JTAG before the PL is programmed, so `psu_init()` alone is
+not sufficient on this flow and the ordering in the source document has to be followed.
+
+That is an honest gap against item 7 of the case format. It is left visible rather than
+filled in, because a number nobody measured is worth less than a stated absence.
 
 The full sequence, the corrected `PCAP_STATUS` bit map, two registers that actively
 mislead during debug, and the working bring-up order are in the source document.
