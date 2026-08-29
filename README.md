@@ -17,6 +17,17 @@ the fix cost.
 
 Prove it once, and everyone keeps the result.
 
+## Three ways in
+
+- **Read Case 001.** [The clock was right and the hub was still dead](cases/001-zcu104-ps-pl-isolation/).
+- **Reproduce it.** [How reproduction works](REPRODUCE.md), then
+  [file a reproduction report](../../issues/new?template=reproduction-report.yml). A failed
+  reproduction is as valuable as a successful one.
+- **Submit a failure.** [Propose a case](../../issues/new?template=case-submission.yml), and
+  see [CASE_TEMPLATE.md](CASE_TEMPLATE.md) for the shape it needs to take.
+
+Claims here carry a result class. See [EVIDENCE_STANDARD.md](EVIDENCE_STANDARD.md).
+
 ## What a case must contain
 
 Every case in this commons carries all ten of the following. A write-up missing any of

@@ -1,0 +1,70 @@
+name: Case submission
+description: Propose a new case. Open this before writing it up.
+title: "[case] "
+labels: ["case-proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Open this before you spend effort on a full write-up, so the provenance and safety
+        questions get settled first. See
+        [CASE_TEMPLATE.md](../blob/main/CASE_TEMPLATE.md) and
+        [EVIDENCE_STANDARD.md](../blob/main/EVIDENCE_STANDARD.md).
+  - type: textarea
+    id: symptom
+    attributes:
+      label: The symptom
+      description: What broke, in plain language. Include the real error text if there is one.
+    validations:
+      required: true
+  - type: textarea
+    id: rootcause
+    attributes:
+      label: Root cause, if you have it
+      description: >
+        The mechanism, not the symptom. If you have not found it yet, say so. A case with an
+        unsolved root cause can still be worth opening, it is just not publishable yet.
+    validations:
+      required: true
+  - type: dropdown
+    id: provenance
+    attributes:
+      label: Provenance of the design
+      description: One of these must be true. This is the gate that keeps the commons publishable.
+      options:
+        - I constructed it deliberately for this case
+        - It is already openly licensed
+        - The owner gave written permission and I can produce it
+    validations:
+      required: true
+  - type: checkboxes
+    id: cleanroom
+    attributes:
+      label: Clean room
+      options:
+        - label: >
+            This is not reconstructed from memory of employer work, and publishing it does not
+            disclose anything I am not free to disclose.
+          required: true
+  - type: input
+    id: cost
+    attributes:
+      label: What is needed to reproduce it
+      placeholder: "free tools, no hardware / ZCU104 and Vivado / oscilloscope"
+    validations:
+      required: true
+  - type: dropdown
+    id: reproducer
+    attributes:
+      label: Do you have a minimal reproducer
+      options:
+        - "Yes, minimal and self-contained"
+        - "Yes, but it is large and needs reducing"
+        - "Not yet"
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        **Do not open a public issue for an unpatched security vulnerability.**
+        See [SECURITY.md](../blob/main/SECURITY.md).

@@ -1,0 +1,81 @@
+name: Reproduction report
+description: You tried to reproduce a case. Report what you saw, matching or not.
+title: "[repro] Case NNN: "
+labels: ["reproduction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for running this. A failed reproduction is as valuable as a successful one,
+        so please report a divergence exactly as readily as a match. Guessed fields are worse
+        than blank ones.
+  - type: input
+    id: case
+    attributes:
+      label: Which case
+      placeholder: "001"
+    validations:
+      required: true
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Outcome
+      options:
+        - reproduced (I saw what the case describes)
+        - diverged (I saw something different)
+        - blocked (could not get far enough to tell)
+    validations:
+      required: true
+  - type: input
+    id: hardware
+    attributes:
+      label: Board or device, including revision
+      placeholder: "ZCU104 rev 1.0, xczu7ev"
+    validations:
+      required: true
+  - type: input
+    id: tools
+    attributes:
+      label: Tool names and exact versions
+      placeholder: "Vivado 2023.2, Ubuntu 22.04"
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Case commit hash you followed
+    validations:
+      required: true
+  - type: textarea
+    id: commands
+    attributes:
+      label: Commands you ran
+      description: Verbatim, in order.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output you got
+      description: Verbatim. Paste the real thing rather than describing it.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: undocumented
+    attributes:
+      label: Anything you had to do that the case did not tell you to do
+      description: >
+        The most useful field here. Undocumented setup is the usual reason a case works for
+        its author and nobody else, and its author cannot see it.
+  - type: dropdown
+    id: attribution
+    attributes:
+      label: Attribution
+      options:
+        - Credit me by name
+        - Credit me by handle
+        - Do not credit me
+    validations:
+      required: true

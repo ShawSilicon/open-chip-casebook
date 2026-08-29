@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security or vulnerability disclosure
+    url: https://github.com/ShawSilicon/open-chip-casebook/blob/main/SECURITY.md
+    about: Do not open a public issue. Report privately, see the disclosure policy.
+  - name: Private engagement on proprietary RTL
+    url: https://shawsilicon.ai
+    about: The commons is free and public. Work on RTL that cannot be published is a scoped private engagement.
