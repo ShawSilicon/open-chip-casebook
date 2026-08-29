@@ -65,17 +65,17 @@ anyone can do here.
 | No. | Case | Domain | State | Source |
 |---|---|---|---|---|
 | 001 | [The clock was right and the hub was still dead](cases/001-zcu104-ps-pl-isolation/) | FPGA bring-up, ZynqMP PS-PL isolation | `AWAITING INDEPENDENT REPRODUCTION` | [kv-page-lifecycle-guard](https://github.com/taitashaw/kv-page-lifecycle-guard/blob/master/docs/hil/ps_pl_isolation.md) |
+| 002 | [The same RTL, three simulators, three answers](cases/002-cross-simulator-disagreement/) | RTL portability, cross-simulator verification | `AWAITING INDEPENDENT REPRODUCTION` | [cxl-type3-admission-control-plane](https://github.com/taitashaw/cxl-type3-admission-control-plane) |
 
-### Not cases
+### Proof artifacts
 
-Some published work is evidence without being a case. It belongs in the commons but not in
-the table above, because a case requires a failure: a symptom, a hypothesis that was wrong,
-a root cause and a fix. Passing proofs have none of those.
+Published work that is evidence without being a case. A case requires a failure: a symptom,
+a hypothesis that was wrong, a root cause and a fix. Passing proofs have none of those, so
+they live here instead of in the table above.
 
-- **CXL Type-3 CDC and reset infrastructure.** `async_fifo`, `sync_bits`, `reset_sync`, with
-  no-overflow, gray-code invariant, pointer-lag bound and end-to-end data integrity all
-  proven by unbounded k-induction in SymbiYosys, safety only, no liveness claimed. Free
-  tools, no hardware, one command to rerun. It is a proof artifact, not a case.
+| No. | Artifact | Reproduction cost |
+|---|---|---|
+| 001 | [Clock domain crossing, async FIFO, proven by k-induction](proofs/001-async-fifo-cdc/) | Free tools, no hardware |
 
 ## Where to start
 
