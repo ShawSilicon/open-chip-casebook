@@ -42,7 +42,7 @@ the state is visible on the case itself.
 | State | Meaning |
 |---|---|
 | `PUBLISHED` | The write-up is complete and meets all ten requirements except item 9. |
-| `AWAITING REPRODUCTION` | Published, and nobody outside the original author has rerun it yet. |
+| `AWAITING INDEPENDENT REPRODUCTION` | Published, and nobody outside the original author has rerun it yet. |
 | `REPRODUCED` | A second contributor has rerun it and reported what they saw. |
 
 A case only becomes `REPRODUCED` when someone who did not write it runs it and says so in
@@ -53,7 +53,7 @@ anyone can do here.
 
 | No. | Case | Domain | State | Source |
 |---|---|---|---|---|
-| 001 | [The debug core that was not a clock problem](cases/001-zcu104-ps-pl-isolation/) | FPGA bring-up, ZynqMP PS-PL isolation | `AWAITING REPRODUCTION` | [kv-page-lifecycle-guard](https://github.com/taitashaw/kv-page-lifecycle-guard/blob/master/docs/hil/ps_pl_isolation.md) |
+| 001 | [The clock was right and the hub was still dead](cases/001-zcu104-ps-pl-isolation/) | FPGA bring-up, ZynqMP PS-PL isolation | `AWAITING INDEPENDENT REPRODUCTION` | [kv-page-lifecycle-guard](https://github.com/taitashaw/kv-page-lifecycle-guard/blob/master/docs/hil/ps_pl_isolation.md) |
 
 ### Not cases
 

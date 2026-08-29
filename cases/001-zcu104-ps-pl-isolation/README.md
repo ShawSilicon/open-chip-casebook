@@ -1,8 +1,8 @@
-# Case 001: the debug core that was not a clock problem
+# Case 001: the clock was right and the hub was still dead
 
 | | |
 |---|---|
-| **State** | `AWAITING REPRODUCTION` |
+| **State** | `AWAITING INDEPENDENT REPRODUCTION` |
 | **Domain** | FPGA bring-up, Zynq UltraScale+ PS-PL power domain isolation |
 | **Reproduction cost** | ZCU104 board and a Vivado installation. Not free to rerun. |
 | **Source** | [kv-page-lifecycle-guard/docs/hil/ps_pl_isolation.md](https://github.com/taitashaw/kv-page-lifecycle-guard/blob/master/docs/hil/ps_pl_isolation.md) |
@@ -16,7 +16,8 @@ while it runs. The chip programs correctly. The tools confirm the analyser is pr
 the built design. But when the engineer connects, the analyser is not there.
 
 The obvious suspect is the clock, because a circuit with no clock cannot answer. Every
-clock setting checks out. It is not the clock.
+clock setting checks out. The configuration is right, and the hub is still dead: the
+clock is enabled at the source and no edges ever arrive at the other end.
 
 The real cause is a wall. This chip has a processor half and a programmable half, and the
 two are separated by a power barrier that is held shut until firmware explicitly asks for
@@ -40,8 +41,8 @@ cross the PS-PL boundary through voltage level shifters whose enables are gated 
 power domain (UG1085 p.34). That wall comes down by a PMU service request, not by clock
 configuration.
 
-`psu_ps_pl_isolation_removal_data()` exists in the XSA's own `psu_init.c`, but `psu_init()`
-never calls it. Its only callers sit inside FSBL, and every one of their guards fails in a
+`psu_ps_pl_isolation_removal_data()` exists in the XSA's own `psu_init.c`. In this build
+`psu_init()` never calls it. Its only callers sit inside FSBL, and every one of their guards fails in a
 JTAG side-loaded flow.
 
 So `CRL_APB` reports the clock as active while no edges reach the fabric.
