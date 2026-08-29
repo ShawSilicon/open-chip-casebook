@@ -65,7 +65,7 @@ anyone can do here.
 | No. | Case | Domain | State | Source |
 |---|---|---|---|---|
 | 001 | [The clock was right and the hub was still dead](cases/001-zcu104-ps-pl-isolation/) | FPGA bring-up, ZynqMP PS-PL isolation | `AWAITING INDEPENDENT REPRODUCTION` | [kv-page-lifecycle-guard](https://github.com/taitashaw/kv-page-lifecycle-guard/blob/master/docs/hil/ps_pl_isolation.md) |
-| 002 | [The same RTL, three simulators, three answers](cases/002-cross-simulator-disagreement/) | RTL portability, cross-simulator verification | `AWAITING INDEPENDENT REPRODUCTION` | [cxl-type3-admission-control-plane](https://github.com/taitashaw/cxl-type3-admission-control-plane) |
+| 002 | [The same RTL, three simulators, no agreement](cases/002-cross-simulator-disagreement/) | RTL portability, cross-simulator verification | `AWAITING INDEPENDENT REPRODUCTION` | [cxl-type3-admission-control-plane](https://github.com/taitashaw/cxl-type3-admission-control-plane) |
 
 ### Proof artifacts
 

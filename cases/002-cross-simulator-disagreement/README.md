@@ -1,4 +1,4 @@
-# Case 002: the same RTL, three simulators, three answers
+# Case 002: the same RTL, three simulators, no agreement
 
 | | |
 |---|---|
