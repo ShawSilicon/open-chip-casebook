@@ -56,6 +56,10 @@ the state is visible on the case itself.
 | `AWAITING INDEPENDENT REPRODUCTION` | Published, and nobody outside the original author has rerun it yet. |
 | `REPRODUCED` | A second contributor has rerun it and reported what they saw. |
 
+These three states track **reproduction**, not fix status. A case can be fully diagnosed
+with its correction still unapplied. Where that is true the case says so in its own
+header and in its evidence boundary, rather than being held back unpublished.
+
 A case only becomes `REPRODUCED` when someone who did not write it runs it and says so in
 an issue. That is the whole mechanism. Reproducing a case is the most valuable thing
 anyone can do here.
@@ -66,6 +70,7 @@ anyone can do here.
 |---|---|---|---|---|
 | 001 | [The clock was right and the hub was still dead](cases/001-zcu104-ps-pl-isolation/) | FPGA bring-up, ZynqMP PS-PL isolation | `AWAITING INDEPENDENT REPRODUCTION` | [kv-page-lifecycle-guard](https://github.com/taitashaw/kv-page-lifecycle-guard/blob/master/docs/hil/ps_pl_isolation.md) |
 | 002 | [The same RTL, three simulators, no agreement](cases/002-cross-simulator-disagreement/) | RTL portability, cross-simulator verification | `AWAITING INDEPENDENT REPRODUCTION` | [cxl-type3-admission-control-plane](https://github.com/taitashaw/cxl-type3-admission-control-plane) |
+| 003 | [It passed C simulation and lost a beat in hardware](cases/003-hls-passes-csim-drops-a-beat/) | HLS, AXI-Stream integration | `AWAITING INDEPENDENT REPRODUCTION` | [rope-hls-vs-rtl](https://github.com/taitashaw/rope-hls-vs-rtl) |
 
 ### Proof artifacts
 
