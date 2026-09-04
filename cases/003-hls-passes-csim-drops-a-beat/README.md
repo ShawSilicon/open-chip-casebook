@@ -1,4 +1,4 @@
-# Case 003: it passed C simulation and lost a beat in hardware
+# Case 003: the test could not see it
 
 | | |
 |---|---|
@@ -9,6 +9,18 @@
 | **Source** | [rope-hls-vs-rtl](https://github.com/taitashaw/rope-hls-vs-rtl), finding F4 |
 | **Licence** | Apache 2.0 |
 | **Verified by author** | Phase 2, logs committed |
+
+## Why this case exists
+
+Verification takes 60 to 70% of engineering effort on a chip project, and only 14% of
+ASIC and SoC projects still reach first-silicon success, the lowest figure in more than
+twenty years of tracking (2024 Siemens EDA / Wilson Research Group Functional Verification
+Study). Teams are not failing because they skip verification. They are failing while doing
+more of it than any other activity.
+
+This case is one concrete reason. The test here did not fail to catch the bug because it was
+weak or incomplete. It could not catch the bug, because the level it ran at has no concept
+of the thing that broke. Effort was never the problem. Blindness was.
 
 ## What failed, in plain language
 
@@ -74,6 +86,38 @@ That is a kernel change, not a wrapper patch.
 Cost: `NOT_MEASURED`. No area, timing or power comparison exists between the two loop forms,
 because the change was never made.
 
+## The attempted correction, and what it did
+
+**Attempted 4 Sep 2026. Reverted the same day.** The specified fix was applied and it made
+things worse.
+
+The candidate change reframed the loop by the known block length instead of terminating on
+stream emptiness. Measured through the identical wrapper:
+
+| metric | before | after the attempt |
+|---|---|---|
+| `beats_out` | 255 | 255, unchanged |
+| `bit_exact` | 1947 | 343 |
+| `mism` | 93 | 1697 |
+| `max_lsb` | 2 | 65535, full scale |
+
+The missing beat was not recovered, and the data went from 93 mismatches to 1697.
+
+**C simulation passed the same change**, reporting `[PASS] functionally correct RoPE,
+max_abs_err 6.104e-05 < 2.0e-03`.
+
+Why it regressed: the original loop recovered its position from the stream's own
+end-of-block marker on every beat. The candidate fix derived position from a loop counter
+instead, assuming the stream was block-aligned on entry. With the first block still one beat
+short, every later block sat one beat out of phase, so every angle was computed for the
+wrong position. The change removed the design's only resynchronisation.
+
+This is the case's own argument arriving a second time and larger. The blind test did not
+merely fail to catch the original defect. It approved a regression eighteen times worse.
+
+The kernel has been reverted. The attempt is recorded here rather than discarded, because a
+correction that fails is evidence about the test, not just about the fix.
+
 ## Evidence boundary
 
 This case is diagnosed but not closed, and that is the honest state of it.
@@ -81,10 +125,14 @@ This case is diagnosed but not closed, and that is the honest state of it.
 What is `MEASURED`: the defect, its exact magnitude, its scope, and four competing
 explanations eliminated.
 
-What is `NOT_MEASURED`: everything after the fix. There is no after. Publishing the
-diagnosis without the correction is deliberate, because a complete diagnosis with three
-alternatives eliminated is useful to somebody hitting the same symptom today, and waiting
-for a v1.1 that has not been scheduled would mean publishing nothing.
+What is also `MEASURED`: the failed candidate correction above, and the fact that C
+simulation approved it.
+
+What is `NOT_MEASURED`: any state in which this defect is fixed. One correction has been
+attempted and rejected; no working correction exists yet, so there is no cost figure for one
+either. Publishing the diagnosis without a working fix is deliberate. A complete diagnosis
+with four competing explanations eliminated is useful to somebody hitting the same symptom
+today, and a rejected correction is itself evidence about the test.
 
 Verification required to close it: the first head emits 16 beats with TLAST on beat 15,
 `beats_out` 256, and data matching the golden within the separate float-trig tolerance.
